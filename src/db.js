@@ -31,7 +31,12 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY, BD, DB_DEPLOYRAIL } = process.
    {
       logging: false, 
       native: false, 
-      
+      dialectOptions: {
+         ssl: {
+           require: true, // Requiere SSL/TLS
+           rejectUnauthorized: false // Ajusta esta opción según tu configuración de certificados
+         }
+       }
    }  
 ) 
 
