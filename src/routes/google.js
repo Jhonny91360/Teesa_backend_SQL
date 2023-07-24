@@ -12,15 +12,17 @@ googleRouter.get("/signup", passport.authenticate("google-signup", {scope: ['ema
 
 googleRouter.get('/callback', (req, res, next) => {
 
-  
-      passport.authenticate('google-signup', { failureRedirect: 'https://pf-teesa-front.vercel.app/signup', failureFlash: true }, (err, user) => {
+                                                              //'https://pf-teesa-front.vercel.app/signup'
+      passport.authenticate('google-signup', { failureRedirect: 'https://www.teesa.online/signup', failureFlash: true }, (err, user) => {
       if (err) {
         console.error('Error en la autenticación de Google:', err);
-        return res.redirect('https://pf-teesa-front.vercel.app/signup');
+                          //'https://pf-teesa-front.vercel.app/signup'
+        return res.redirect('https://www.teesa.online/signup');
       }
       if (!user) {
         req.session.errorMessage = 'Error en la autenticación de Google';
-        return res.redirect('https://pf-teesa-front.vercel.app/signup');
+                          //'https://pf-teesa-front.vercel.app/signup'
+        return res.redirect('https://www.teesa.online/signup');
       }
   
       const { displayName, emails, accessToken, refreshToken, id } = user;
@@ -35,13 +37,15 @@ googleRouter.get('/callback', (req, res, next) => {
             }
             if(existingUser.enable){
             const queryParams = new URLSearchParams(userData).toString();
-            const redirectUrl = `https://pf-teesa-front.vercel.app/home?${queryParams}`;
+                              //'https://pf-teesa-front.vercel.app/signup'
+            const redirectUrl = `https://www.teesa.online/home?${queryParams}`;
             return res.redirect(redirectUrl); //definir con el front que ruta vamos a mostrar para decirle al cliente que ya existe
           }
             else {
               await User.update({enable:true}, {where:{correo:emails[0].value }});
               const queryParams = new URLSearchParams(userData).toString();
-              const redirectUrl = `https://pf-teesa-front.vercel.app/home?${queryParams}`;
+                                //'https://pf-teesa-front.vercel.app/signup'
+              const redirectUrl = `https://www.teesa.online/home?${queryParams}`;
               return res.redirect(redirectUrl);
             }
           }
@@ -54,7 +58,8 @@ googleRouter.get('/callback', (req, res, next) => {
                 id: newUser.id
             }
             const queryParams = new URLSearchParams(userData).toString();
-            const redirectUrl = `https://pf-teesa-front.vercel.app/home?${queryParams}`;
+                              //'https://pf-teesa-front.vercel.app/signup'
+            const redirectUrl = `https://www.teesa.online/home?${queryParams}`;
               
               res.redirect(redirectUrl);
             })

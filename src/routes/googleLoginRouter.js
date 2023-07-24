@@ -9,11 +9,12 @@ const googleRouter = require("./google");
 
 
 googleLoginRouter.get("/login", passport.authenticate("google-login", {scope: ['email','profile']}))
-
-googleLoginRouter.get('/callback', passport.authenticate('google-login', { failureRedirect: 'https://pf-teesa-front.vercel.app/login', failureFlash: true }),async (req,res,next)=>{
+                                                                                           //https://pf-teesa-front.vercel.app/
+googleLoginRouter.get('/callback', passport.authenticate('google-login', { failureRedirect: 'https://www.teesa.online/login', failureFlash: true }),async (req,res,next)=>{
   if (req.authError) {
     req.flash('error', req.authError);
-    return res.redirect('https://pf-teesa-front.vercel.app/login');
+                       //https://pf-teesa-front.vercel.app/
+    return res.redirect('https://www.teesa.online/login');
   }
 
   const { emails } = req.user;
@@ -28,7 +29,8 @@ googleLoginRouter.get('/callback', passport.authenticate('google-login', { failu
     }
 
     const queryParams = new URLSearchParams(userData).toString();
-    const redirectUrl = `https://pf-teesa-front.vercel.app/home?${queryParams}`;
+                       //https://pf-teesa-front.vercel.app/
+    const redirectUrl = `https://www.teesa.online/home?${queryParams}`;
 
 
     req.login(existingUser, err => {
@@ -43,7 +45,8 @@ googleLoginRouter.get('/callback', passport.authenticate('google-login', { failu
     } else {
     // Usuario no existente, redirigir a la página de registro o mostrar un mensaje de error
     req.flash('error', 'Usuario no registrado');
-    return res.redirect('https://pf-teesa-front.vercel.app/signup');
+                       //https://pf-teesa-front.vercel.app/
+    return res.redirect('https://www.teesa.online/signup');
     }
 
   }
