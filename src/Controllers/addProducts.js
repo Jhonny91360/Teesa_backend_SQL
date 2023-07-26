@@ -4,7 +4,7 @@ const allowedExtensions = ["jpg", "jpeg", "png"];
 
 const addProducts= async (req,res)=>{
 
-
+    console.log("Me llega para crear producto: ",req);
     const { nombre, tipo, caracteristicas, categoria, imagenes, precio, stock, marca, descripcion, ref, estado } = req.body;
         
     //console.log("Esto me llega : "+req.file)

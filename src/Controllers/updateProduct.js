@@ -12,19 +12,29 @@ const updateProduct=async(req,res)=>{
 
     try {
         let uploadedImages = [];
-        if(imagenes.length>0){
-
-        for (const imagen of imagenes) {
-         const cloudinaryResponse = await cloudinary.uploader.upload(imagen, {
-         folder: 'products'
-         });
-
-        const imageUrl = cloudinaryResponse.secure_url;
-        uploadedImages.push(imageUrl);
-         }
-        }
+        
 
         const product= await Product.findOne({ where: { id: idProduct } });
+
+        if(imagenes.length>0){
+            //Elimino las imagenes que tenia en clodinary de ese producto
+            if(product	){
+                for (const imagen of product.imagenes) {
+                    const clodinaryDelete= await cloudinary.uploader.destroy(imagen,{
+                        folder: 'products'
+                    })
+                }
+            }
+            // Cargo las nuevas imagenes a cloudinary
+            for (const imagen of imagenes) {
+             const cloudinaryResponse = await cloudinary.uploader.upload(imagen, {
+             folder: 'products'
+             });
+    
+            const imageUrl = cloudinaryResponse.secure_url;
+            uploadedImages.push(imageUrl);
+             }
+            }
 
         if(product){
             
