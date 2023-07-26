@@ -20,9 +20,7 @@ const updateProduct=async(req,res)=>{
             //Elimino las imagenes que tenia en clodinary de ese producto
             if(product	){
                 for (const imagen of product.imagenes) {
-                    const clodinaryDelete= await cloudinary.uploader.destroy(imagen,{
-                        folder: 'products'
-                    })
+                    const clodinaryDelete= await cloudinary.uploader.destroy(imagen)
                 }
             }
             // Cargo las nuevas imagenes a cloudinary
