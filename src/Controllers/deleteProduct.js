@@ -7,6 +7,14 @@ const deleteProduct=async(req,res)=>{
     if(!uuidRegExp.test(idProduct)) return res.status(400).json({message: "Id invalido"}) //Validacion de uuid
 
     try {
+        //Encuentro producto para eliminar la imagenes guardadas en cloudinary
+        const product= await Product.findOne({ where: { id: idProduct } });
+        for (const imagen of product.imagenes) {
+            let publicId = await cloudinary.url(imagen, { type: 'upload' }).split('/').pop().split('.')[0];
+            publicId=`products/${publicId}`
+            const clodinaryDelete= await cloudinary.uploader.destroy(publicId)
+        }
+
         const productDeleted= await Product.destroy({
             where:{
                 id:idProduct
