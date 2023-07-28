@@ -11,7 +11,7 @@ const getCartProducts = async (req, res) => {
       where: { CartId },
       include: {
         model: Product,
-        attributes: ['id', 'nombre', 'precio', 'descripcion', 'imagenes', 'categoria', 'marca', 'ref' ], 
+        attributes: ['id', 'nombre', 'precio', 'descripcion', 'imagenes', 'categoria', 'marca', 'ref','tipo' ], 
       },
     });
   } else {
