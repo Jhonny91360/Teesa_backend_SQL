@@ -15,7 +15,9 @@ const getUserByID = async(req,res)=>{
             direccion: usuario.direccion,
             telefono: usuario.telefono,
             nit: usuario.nit,
-            correo:usuario.correo
+            correo:usuario.correo,
+            ciudad:usuario.ciudad,
+            detalles:usuario.detalles,
         }
 
         return res.status(200).json(usuarioEncontrado)

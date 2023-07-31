@@ -45,6 +45,14 @@ module.exports = (sequelize) => {
       type:DataTypes.BOOLEAN,
       allowNull:false,
       defaultValue:true,
+    },
+    ciudad:{
+      type: DataTypes.STRING,
+      defaultValue:"",
+    },
+    detalles:{
+      type: DataTypes.STRING,
+      defaultValue:"",
     }
 
   }, {timestamps: false});

@@ -7,7 +7,7 @@ const uuidRegExp = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-
 const updateUser=async(req,res)=>{
     const {idUser}=req.params
     if(!uuidRegExp.test(idUser)) return res.status(400).json({message: "Id invalido"}) //Validacion de uuid
-    let{nombre,direccion,telefono,nit}= req.body
+    let{nombre,direccion,telefono,nit,ciudad,detalles}= req.body
     
    try {
     const user= await User.findOne({ where: { id: idUser } });
@@ -16,6 +16,8 @@ const updateUser=async(req,res)=>{
         user.direccion=direccion;
         user.telefono=telefono;
         user.nit=Number(nit);
+        user.ciudad=ciudad;
+        user.detalles=detalles;
         const updatedUser= await user.save();
         //Regenerar token con nueva info///
         const token=jwt.sign({
@@ -26,7 +28,9 @@ const updateUser=async(req,res)=>{
             direccion:user.direccion,
             telefono:user.telefono,
             nit:user.nit,
-            correo:user.correo,         
+            correo:user.correo, 
+            ciudad:user.ciudad,
+            detalles:user.detalles        
         },secret)
 
         return res.status(200).json({token})
