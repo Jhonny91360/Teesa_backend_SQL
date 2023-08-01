@@ -7,7 +7,8 @@ const createOrder = async (req,res)=>{
     try{
 
     mercadopago.configure({
-        access_token: "TEST-506669402188981-061413-d4d1537702f9ee8b568253de5e4b879f-1399136636"
+        //access_token: "TEST-506669402188981-061413-d4d1537702f9ee8b568253de5e4b879f-1399136636"
+        access_token:"TEST-6291707727318397-080115-94a23194e5ec1601243fd310cf7dd056-1439388864"
     })
 
     // MANDAR POR GOOGLE ID
@@ -25,7 +26,7 @@ const createOrder = async (req,res)=>{
     
 
 
-
+    ///Crear una orden de compra
     const result = await mercadopago.preferences.create({
         
         items: [{
