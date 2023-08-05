@@ -23,10 +23,10 @@ paymentRouter.post('/create_order/:id', createOrder)
 paymentRouter.post('/webhook', async (req,res)=>{
     
     const payment = req.query;
+    const informacion=req.body;
+    console.log('Me llega por query: ',payment)
+    console.log("Me llega por body: ",informacion)
 
-    const resultadoPayment=  await mercadopago.payment.findById(payment['data.id']);
-    console.log('Info de la transaccion: ',resultadoPayment)
-    
     try {
     if(payment.type === 'payment'){
         const data = await mercadopago.payment.findById(payment['data.id']);
