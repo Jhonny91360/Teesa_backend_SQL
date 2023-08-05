@@ -24,8 +24,9 @@ paymentRouter.post('/webhook', async (req,res)=>{
     
     const payment = req.query;
 
-    console.log("Info de mercado pago: ",payment)
-
+    const resultadoPayment=  await mercadopago.payment.findById(payment['data.id']);
+    console.log('Info de la transaccion: ',resultadoPayment)
+    
     try {
     if(payment.type === 'payment'){
         const data = await mercadopago.payment.findById(payment['data.id']);

@@ -50,10 +50,12 @@ const createOrder = async (req,res)=>{
 
     
 
-    res.status(202).json(result.body.init_point)}
+    res.status(202).json(result.body.init_point)
+}
     catch(err){
         console.log(err)
-        res.sendStatus(400).json({message:err.message})}
+        res.sendStatus(400).json({message:err.message})
+    }
 
 };
 
