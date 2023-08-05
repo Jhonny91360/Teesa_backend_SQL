@@ -24,7 +24,7 @@ paymentRouter.post('/webhook', async (req,res)=>{
     
     const payment = req.query;
 
-
+    console.log("Info de mercado pago: ".payment)
 
     try {
     if(payment.type === 'payment'){
