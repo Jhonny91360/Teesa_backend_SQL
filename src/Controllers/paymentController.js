@@ -7,12 +7,11 @@ const createOrder = async (req,res)=>{
     try{
 
     mercadopago.configure({
-        //access_token: "TEST-506669402188981-061413-d4d1537702f9ee8b568253de5e4b879f-1399136636"
-        //access_token:"TEST-6291707727318397-080115-94a23194e5ec1601243fd310cf7dd056-1439388864"
+        access_token:"TEST-6291707727318397-080115-94a23194e5ec1601243fd310cf7dd056-1439388864" //vendedor prueba 
         //toke teesa:APP_USR-5406266318410811-080416-fe0c71c68815bfeebeadb435586f510f-1281028042
-        access_token:"APP_USR-5406266318410811-080416-fe0c71c68815bfeebeadb435586f510f-1281028042",
-        client_id: "5406266318410811",
-        client_secret:"1NDx7BVinjZUhlPEne9t4eRPtEmIiv02"
+       // access_token:"APP_USR-5406266318410811-080416-fe0c71c68815bfeebeadb435586f510f-1281028042",
+        //client_id: "5406266318410811",
+        //client_secret:"1NDx7BVinjZUhlPEne9t4eRPtEmIiv02"
     
     })
 
