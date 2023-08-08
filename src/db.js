@@ -10,24 +10,11 @@ const ReviewModel = require('./models/Reviews')
 const CartProductsModel=require("./models/CartProducts")
 const CartGuestProductsModel=require("./models/CartGuestProducts")
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY, BD, DB_DEPLOYRAIL } = process.env;
-// PARA DEPLOY CON RENDER
-// const sequelize = new Sequelize(
-//    DB_DEPLOY,
-//    {
-//       logging: false, 
-//       native: false, 
-//       dialectOptions: {
-//          ssl: {
-//             require: true
-//          }
-//       }
-//    }
-// )
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_DEPLOY, BD, DB_DEPLOYRENDER } = process.env;
 
-// PARA DEPLOY CON RAILWAY
+// PARA DEPLOY CON RENDER
  const sequelize = new Sequelize(
-   DB_DEPLOYRAIL,
+   DB_DEPLOYRENDER,
    {
       logging: false, 
       native: false, 

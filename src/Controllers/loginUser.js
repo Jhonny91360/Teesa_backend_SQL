@@ -3,7 +3,7 @@ const bcryptjs=require('bcryptjs')
 const { User } = require("../db");
 const { Op } = require('sequelize');
 const jwt= require('jsonwebtoken');
-const secret=process.env.SECRET
+const secret=process.env.JWT_SECRET
 
 const loginUser=async(req,res)=>{
 

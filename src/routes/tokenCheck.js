@@ -1,5 +1,5 @@
 const jwt= require('jsonwebtoken');
-const secret=process.env.SECRET
+const secret=process.env.JWT_SECRET
 
 const tokenCheck= async(req, res, next)=> {
 
