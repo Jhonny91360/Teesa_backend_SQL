@@ -1,18 +1,14 @@
 const mercadopago= require("mercadopago");
 const {Cart} = require("../db");
 const {CartProducts} = require("../db");
+const {MERCADO_PAGO_ACCESS_TOKEN,URL_FRONT,URL_BACK} = process.env;
 
 const createOrder = async (req,res)=>{
     const {id} = req.params;
     try{
 
-    mercadopago.configure({
-        //access_token:"TEST-6291707727318397-080115-94a23194e5ec1601243fd310cf7dd056-1439388864" //vendedor prueba 
-        //toke teesa:APP_USR-5406266318410811-080416-fe0c71c68815bfeebeadb435586f510f-1281028042
-         access_token:"APP_USR-5406266318410811-080416-fe0c71c68815bfeebeadb435586f510f-1281028042"
-        //client_id: "5406266318410811",
-        //client_secret:"1NDx7BVinjZUhlPEne9t4eRPtEmIiv02"
-    
+    mercadopago.configure({    
+         access_token:MERCADO_PAGO_ACCESS_TOKEN
     })
 
     // MANDAR POR GOOGLE ID
@@ -41,12 +37,12 @@ const createOrder = async (req,res)=>{
 
         }],
         back_urls: {
-            success: "https://www.teesa.online/checkoutsuccess",
-            failure: "https://www.teesa.online/checkoutfailed",
-            pending: "https://www.teesa.online/checkoutpending"
+            success: `${URL_FRONT}/checkoutsuccess`,
+            failure: `${URL_FRONT}/checkoutfailed`,
+            pending: `${URL_FRONT}/checkoutpending`
         },
         external_reference: `${id},${carrito.dataValues.id}`,
-        notification_url: 'https://teesa-backend.onrender.com/mercadopago/webhook'
+        notification_url: `${URL_BACK}/mercadopago/webhook`
         // notification_url: 'https://35d9-2800-484-e882-90e4-e450-ad55-4d12-f2dc.ngrok.io/mercadopago/webhook'
     })
 

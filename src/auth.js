@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET} = process.env
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,URL_BACK} = process.env
 const passport = require("passport");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -7,7 +7,7 @@ const googleStrategySignup = new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
                //https://servidor-teesa.onrender.com/
-    callbackURL:"https://teesa-backend.onrender.com/google/callback"
+    callbackURL:`${URL_BACK}/google/callback`
   },
   function(accessToken, refreshToken, profile, cb) {
     
@@ -20,7 +20,7 @@ const googleStrategyLogin= new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
                 //https://servidor-teesa.onrender.com/
-    callbackURL: "https://teesa-backend.onrender.com/auth/google/callback"
+    callbackURL: `${URL_BACK}/auth/google/callback`
   },
   function(accessToken, refreshToken, profile, cb) {
     
