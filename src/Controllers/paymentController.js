@@ -24,7 +24,7 @@ const createOrder = async (req,res)=>{
     products.map(prod=>precioTotal += prod.dataValues.precioTotal)
 
     
-
+    console.log("Precio total= ",precioTotal)
 
     ///Crear una orden de compra
     const result = await mercadopago.preferences.create({
@@ -43,7 +43,8 @@ const createOrder = async (req,res)=>{
         },
         external_reference: `${id},${carrito.dataValues.id}`,
         notification_url: `${URL_BACK}/mercadopago/webhook`
-        // notification_url: 'https://35d9-2800-484-e882-90e4-e450-ad55-4d12-f2dc.ngrok.io/mercadopago/webhook'
+        // notification_url: 'https://35d9-2800-484-e882-90e4-e450-ad55-4d12-f2dc.ngrok.io/mercadopago/webhook' //L
+        //notification_url:'https://ad01-190-108-76-149.ngrok.io/mercadopago/webhook'
     })
 
     
@@ -52,7 +53,7 @@ const createOrder = async (req,res)=>{
 }
     catch(err){
         console.log(err)
-        res.sendStatus(400).json({message:err.message})
+        res.status(400).json({message:err.message})
     }
 
 };
