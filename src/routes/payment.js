@@ -94,7 +94,7 @@ paymentRouter.post('/webhook', async (req,res)=>{
 
         const mailOptions = {
             from: 'ventas.online.teesa@gmail.com',
-            to: ['jhonnyzamsa@hotmail.com'],
+            to: ['jhonnyzamsa@hotmail.com','juandgustin@gmail.com',`${obj.User.correo}`],
             subject: 'Confirmacion de compra - Teesa.online',
             html:`
               <h1>Compra realizada</h1>
