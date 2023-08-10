@@ -3,7 +3,7 @@ const googleRouter = Router();
 const passport = require("passport")
 const {User} = require("../db");
 const {URL_FRONT} = process.env;
-
+const nodemailer = require('nodemailer');
 
 
 //SIGNUP
@@ -58,11 +58,41 @@ googleRouter.get('/callback', (req, res, next) => {
                 nombre: newUser.nombre,
                 id: newUser.id
             }
-            const queryParams = new URLSearchParams(userData).toString();
+            //Aqui va el mailer para confirmar creacion de cuenta
+            const transporter = nodemailer.createTransport({
+              service: 'Gmail', // o cualquier otro servicio de correo
+              auth: {
+                user: 'ventas.online.teesa@gmail.com',
+                pass: 'ykgvfuoerbyvaxom',
+              },
+            });
+            const mailOptions = {
+              from: 'ventas.online.teesa@gmail.com',
+              to: [emails[0].value,'ventas.online.teesa@gmail.com'],
+              subject: 'Creacion de cuenta - Teesa.online',
+              html:`
+              <h1>Bienvenido a Teesa</h1>
+              <p>Su cuenta ha sido creada exitosamente</p>
+              `
+            };
+
+            transporter.sendMail(mailOptions)
+            .then(mailInfo=>{
+              console.log('Correo de confirmacion enviado',mailInfo.response);
+              const queryParams = new URLSearchParams(userData).toString();
                               //'https://pf-teesa-front.vercel.app/signup'
-            const redirectUrl = `${URL_FRONT}/home?${queryParams}`;
+              const redirectUrl = `${URL_FRONT}/home?${queryParams}`;
               
               res.redirect(redirectUrl);
+              
+            })
+            .catch(mailError=>{
+              console.log('Error al enviar correo',mailError)
+              next();
+            });
+            
+            ////////////////////////////////////////////////////////////
+            
             })
             .catch(error => {
               console.error('Error al crear un nuevo usuario:', error);
