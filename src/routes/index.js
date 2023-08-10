@@ -36,6 +36,7 @@ const getUserProduct = require("../Controllers/getUserProduct");
 const getUserByID = require("../Controllers/getUserByID");
 const updatePurchase = require("../Controllers/updatePurchase");
 const purchaseChart = require("../Controllers/purchaseChart")
+const mailContactUser=require("../Controllers/mailContactUser");
 
 require("../auth")
 
@@ -151,7 +152,7 @@ router.get('/reviews/validate/:userId',getUserProduct)
 router.get('/reviews/:productId', getReviews)
 
 
-
+router.post("/userContact",mailContactUser)
 
 
 module.exports = router;

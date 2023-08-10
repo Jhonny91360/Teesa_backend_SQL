@@ -54,7 +54,7 @@ paymentRouter.post('/webhook', async (req,res)=>{
         const compra = await Purchased.findAll({where:{idCompra:data.body.order.id},
             include: [{
                 model: Product,
-                attributes: ['nombre','imagenes' ]
+                attributes: ['nombre','imagenes','marca','ref' ]
               },
               {
                 model: User,
@@ -74,7 +74,10 @@ paymentRouter.post('/webhook', async (req,res)=>{
                     productName:item.Product.nombre,
                     cantidad:item.cantidad,
                     precio:item.precio,
-                    imagen:item.Product.imagenes[0]
+                    marca:item.Product.marca,
+                    ref:item.Product.ref,
+                    imagen:item.Product.imagenes[0],
+                    
                 }
             })
                 //{productName:"",cantidad:0,precio:0,imagen:""}      
@@ -94,7 +97,7 @@ paymentRouter.post('/webhook', async (req,res)=>{
 
         const mailOptions = {
             from: 'ventas.online.teesa@gmail.com',
-            to: ['jhonnyzamsa@hotmail.com','juandgustin@gmail.com',`${obj.User.correo}`],
+            to: ['jhonnyzamsa@hotmail.com','cuentadepruebaspam@gmail.com',`${obj.User.correo}`],
             subject: 'Confirmacion de compra - Teesa.online',
             html:`
               <h1>Compra realizada</h1>
@@ -113,6 +116,8 @@ paymentRouter.post('/webhook', async (req,res)=>{
                 <div>
                 <ul>
                   <li><strong>Nombre del producto:</strong> ${item.productName}</li>
+                  <li><strong>Marca:</strong> ${item.marca}</li>
+                  <li><strong>Ref:</strong> ${item.ref}</li>
                   <li><strong>Cantidad:</strong> ${item.cantidad}</li>
                   <li><strong>Precio:</strong> ${item.precio}</li>
                 </ul>

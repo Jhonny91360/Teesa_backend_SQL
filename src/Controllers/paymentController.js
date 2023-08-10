@@ -42,9 +42,9 @@ const createOrder = async (req,res)=>{
             pending: `${URL_FRONT}/checkoutpending`
         },
         external_reference: `${id},${carrito.dataValues.id}`,
-        notification_url: `${URL_BACK}/mercadopago/webhook`
+        //notification_url: `${URL_BACK}/mercadopago/webhook`
         // notification_url: 'https://35d9-2800-484-e882-90e4-e450-ad55-4d12-f2dc.ngrok.io/mercadopago/webhook' //L
-        //notification_url:'https://ad01-190-108-76-149.ngrok.io/mercadopago/webhook'
+        notification_url:'https://5d5a-190-108-76-149.ngrok.io/mercadopago/webhook'
     })
 
     
