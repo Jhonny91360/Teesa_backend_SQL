@@ -24,6 +24,7 @@ const getCartProducts=require("../Controllers/getCartProducts")
 const loginCheck=require ("../Controllers/loginCheck")
 const tokenCheck=require("./tokenCheck")
 const handleEnableUser=require("../Controllers/handleEnableUser.js")
+const handleEnableProduct=require("../Controllers/handleEnableProduct.js")
 const session = require("express-session");
 const passport = require("passport");
 const flash = require("express-flash");
@@ -68,11 +69,15 @@ router.post("/products", addProducts)
 
 //ELIMINA UN PRODUCTO SEGUN SU ID
 // Protección requerida tipo usuario solo ADMIN
-router.delete("/products/:idProduct",deleteProduct)   //elimino proteccion isAdmin
+//router.delete("/products/:idProduct",deleteProduct)   //elimino proteccion isAdmin
+
+//Borrado logico de productos
+router.put("/products/enable/:idProduct",handleEnableProduct)
 
 //MODIFICA LOS VALORES DE UN PRODUCTO GUARDADO
 // Protección requerida tipo usuario solo ADMIN
 router.put("/detail/:idProduct",updateProduct) //elimino proteccion isAdmin
+
 
 //TRAE TODAS LAS MARCAS 
 router.get("/brands", getBrands)
